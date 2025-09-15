@@ -1,10 +1,10 @@
 {% macro get_season(date) %}
 
-CASE WHEN MONTH(TO_TIMESTAMP({{date}})) in (12,1,2)
+CASE WHEN MONTH(TRY_TO_TIMESTAMP({{date}})) in (12,1,2)
     THEN 'WINTER'
-    WHEN MONTH(TO_TIMESTAMP({{date}})) in (3,4,5)
+    WHEN MONTH(TRY_TO_TIMESTAMP({{date}})) in (3,4,5)
     THEN 'SPRING'
-    WHEN MONTH(TO_TIMESTAMP({{date}})) in (6,7,8)
+    WHEN MONTH(TRY_TO_TIMESTAMP({{date}})) in (6,7,8)
     THEN 'SUMMER'
     ELSE 'AUTUMN'
     END
@@ -13,7 +13,7 @@ CASE WHEN MONTH(TO_TIMESTAMP({{date}})) in (12,1,2)
 
 {% macro day_type(date) %}
 CASE
-    WHEN DAYNAME(TO_TIMESTAMP({{date}})) in ('Sat','Sun')
+    WHEN DAYNAME(TRY_TO_TIMESTAMP({{date}})) in ('Sat','Sun')
     THEN 'WEEKEND'
     ELSE 'BUSINESSDAY'
     END
